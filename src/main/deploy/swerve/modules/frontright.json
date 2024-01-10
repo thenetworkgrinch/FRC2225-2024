@@ -7,17 +7,14 @@
   "drive": {
     "type": "falcon",
     "id": 1,
-    "canbus": "rio"
+    "canbus": null
   },
   "angle": {
     "type": "falcon",
     "id": 2,
-    "canbus": "rio"
+    "canbus": null
   },
-  "conversionFactor": {
-    "angle": 0.00686645508,
-    "drive": 0.000022725641302
-  },
+
   "encoder": {
     "type": "thrifty",
     "id": 0,
