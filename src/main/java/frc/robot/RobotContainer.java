@@ -21,6 +21,16 @@ import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.commands.swervedrive.drivebase.TeleopDrive;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
+import swervelib.SwerveDrive;
+import java.io.File;
+import java.io.IOException;
+
+import swervelib.parser.SwerveParser;
+
+import edu.wpi.first.math.util.Units;
+
+
+
 import java.io.File;
 
 /**
@@ -31,9 +41,10 @@ import java.io.File;
 public class RobotContainer
 {
 
+
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
-                                                                         "swerve/neo"));
+                                                                  "swerve"));
   // CommandJoystick rotationController = new CommandJoystick(1);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   CommandJoystick driverController = new CommandJoystick(1);
@@ -43,10 +54,11 @@ public class RobotContainer
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
+   * @throws IOException
    */
-  public RobotContainer()
+  public RobotContainer() throws IOException
   {
-    // Configure the trigger bindings
+  // Configure the trigger bindings
     configureBindings();
 
     AbsoluteDrive closedAbsoluteDrive = new AbsoluteDrive(drivebase,
@@ -92,7 +104,7 @@ public class RobotContainer
         () -> MathUtil.applyDeadband(driverController.getX(), OperatorConstants.LEFT_X_DEADBAND),
         () -> -driverController.getRawAxis(3), () -> true);
 
-    drivebase.setDefaultCommand(!RobotBase.isSimulation() ? closedAbsoluteDrive : closedFieldAbsoluteDrive);
+    drivebase.setDefaultCommand(closedAbsoluteDrive);
   }
 
   /**
